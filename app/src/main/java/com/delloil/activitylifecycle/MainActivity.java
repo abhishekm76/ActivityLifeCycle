@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
                 if (!enteredText.isEmpty()){
                     Intent navIntent = new Intent(MainActivity.this, ShowGuess.class);
                     navIntent.putExtra("guesskey",enteredText);
+                    navIntent.putExtra("age", 23);
+                    navIntent.putExtra("bool", true);
                     startActivity(navIntent);
                 }else{
                     Toast.makeText(MainActivity.this, "You need to enter a name",Toast.LENGTH_SHORT).show();

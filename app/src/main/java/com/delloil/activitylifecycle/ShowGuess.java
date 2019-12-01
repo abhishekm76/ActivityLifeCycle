@@ -3,6 +3,7 @@ package com.delloil.activitylifecycle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class ShowGuess extends AppCompatActivity {
@@ -14,9 +15,14 @@ public class ShowGuess extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_guess);
         showGuess=findViewById(R.id.recievedText);
-        if (getIntent().getStringExtra("guesskey") != null){
-            String passedFromOne = getIntent().getStringExtra("guesskey");
+
+        Bundle fromMainActivity = getIntent().getExtras();
+
+        if (fromMainActivity != null){
+            String passedFromOne = fromMainActivity.getString("guesskey");
             showGuess.setText(passedFromOne);
+            Log.d("PassedInfo", "passedint" + fromMainActivity.getInt("age"));
+            Log.d("PassedInfo","passedboolean"+fromMainActivity.getBoolean("bool"));
         }
     }
 
