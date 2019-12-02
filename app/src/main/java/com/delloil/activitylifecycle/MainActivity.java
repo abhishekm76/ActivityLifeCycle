@@ -1,5 +1,6 @@
 package com.delloil.activitylifecycle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private Button showGuess;
     private EditText userGuess;
+    public final int  REQUEST_CODE =2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                     navIntent.putExtra("guesskey",enteredText);
                     navIntent.putExtra("age", 23);
                     navIntent.putExtra("bool", true);
-                    startActivity(navIntent);
+
+                    startActivityForResult(navIntent,REQUEST_CODE);
+                   // startActivity(navIntent);
                 }else{
                     Toast.makeText(MainActivity.this, "You need to enter a name",Toast.LENGTH_SHORT).show();
 
@@ -41,6 +45,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==REQUEST_CODE){
+            if(resultCode==-1){
+                assert data!=null;
+                String message = data.getStringExtra("message_back");
+                Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
